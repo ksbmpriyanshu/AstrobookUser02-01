@@ -222,7 +222,7 @@ console.log("anujjjjjj",astroData)
               );
             })
           ) : (
-            <Text style={{ textAlign: 'center', color: '#848484', fontSize: 16 }}>
+            <Text style={{ textAlign: 'center', color:colors.black_color7, fontSize: responsiveFontSize(1.7) }}>
               No reviews found
             </Text>
           )
@@ -1286,7 +1286,7 @@ console.log("anujjjjjj",astroData)
 
 
                 fontSize: 8, lineHeight: 10, textAlign: 'center'
-              }}>₹{Number(astroData?.astrologer?.commission_normal_video_call_price) + Number(astroData?.astrologer?.commission_normal_video_call_price)}/min</Text>
+              }}>₹{Number(astroData?.astrologer?.normal_video_call_price) + Number(astroData?.astrologer?.commission_normal_video_call_price)}/min</Text>
             </TouchableOpacity>
 
 

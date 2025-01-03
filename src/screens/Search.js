@@ -25,6 +25,7 @@ import MyStatusBar from '../components/MyStatusbar';
 import StarRating from 'react-native-star-rating-widget';
 import HomeChat from '../components/HomeChat';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { showToastMessage } from '../utils/services';
 
 const { width } = Dimensions.get('screen');
 
@@ -56,16 +57,30 @@ const Search = ({ chatListData, navigation, dispatch, isRefreshing, isMoreLoadin
     const slice11 = wallet.slice(0, 4);
     return slice11;
   };
-
+  function formatNumber(value) {
+    if (value >= 1_000_000_000) {
+      // Format as billion (e.g., 1.2B)
+      return `${(value / 1_000_000_000).toFixed(1)}B`;
+    } else if (value >= 1_000_000) {
+      // Format as million (e.g., 1.5M)
+      return `${(value / 1_000_000).toFixed(1)}M`;
+    } else if (value >= 1_000) {
+      // Format as thousand (e.g., 2.3K)
+      return `${(value / 1_000).toFixed(1)}K`;
+    } else {
+      // For values less than 1,000, show the raw number
+      return value.toString();
+    }
+  }
   const renderItems = ({ item }) => {
     return (
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('astrologerDetailes', {
-            _id: item?._id,
-            type: 'call',
-          })
-        }
+      <View
+        // onPress={() =>
+        //   navigation.navigate('astrologerDetailes', {
+        //     _id: item?._id,
+        //     type: 'call',
+        //   })
+        // }
       >
         <View style={{
           borderWidth: 0.23,
@@ -102,22 +117,37 @@ const Search = ({ chatListData, navigation, dispatch, isRefreshing, isMoreLoadin
               starStyle={{ marginHorizontal: 1 }}
               starSize={12}
             />
-            <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 10, textAlign: "center" }}>{item?.follower_count} followers</Text>
+            <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 10, textAlign: "center" }}>{formatNumber(item?.follower_count)} followers</Text>
             <Text style={{ ...Fonts.primaryHelvetica, color: "#828282", fontSize: 8, textAlign: "center", lineHeight: 8 }}>2212 orders</Text>
           </View>
           <View>
-            <Image
-              source={{ uri: base_url + item.profileImage }}
-              style={{
-                width: width * 0.30,
-                height: width * 0.30,
-                borderRadius: 100,
-                borderWidth: 1,
-                borderColor: "#F1B646",
-                resizeMode: 'cover',
-                marginBottom: 5,
-              }}
-            />
+            {item?.profileImage ? (
+                                      <Image
+                                      source={{ uri: base_url + item.profileImage }}
+                                      style={{
+                                        width: width * 0.30,
+                                        height: width * 0.30,
+                                        borderRadius: 100,
+                                        borderWidth: 1,
+                                        borderColor: "#F1B646",
+                                        resizeMode: 'cover',
+                                        marginBottom: 5,
+                                      }}
+                                    />
+                                   ):(  
+                                     <Image
+                                     source={require('../assets/astrobookimages/avatar_book.png')}
+                                     style={{
+                                       width: width * 0.30,
+                                       height: width * 0.30,
+                                       borderRadius: 100,
+                                       borderWidth: 1,
+                                       borderColor: "#F1B646",
+                                       resizeMode: 'cover',
+                                       marginBottom: 5,
+                                     }}
+                                   />
+                                   )}
           </View>
           <View>
             <Text style={{ ...Fonts.primaryHelvetica, color: "#000", fontSize: 14, lineHeight: 20 }}>
@@ -202,7 +232,7 @@ const Search = ({ chatListData, navigation, dispatch, isRefreshing, isMoreLoadin
 
 
                   fontSize: 8, lineHeight: 10, textAlign: 'center'
-                }}>₹{rounditem(parseFloat(item?.call_price) + parseFloat(item?.commission_call_price))}/min</Text>
+                }}>₹{rounditem(parseFloat(item?.chat_price) + parseFloat(item?.commission_chat_price))}/min</Text>
               </TouchableOpacity>
 
 
@@ -325,14 +355,14 @@ const Search = ({ chatListData, navigation, dispatch, isRefreshing, isMoreLoadin
 
 
                   fontSize: 8, lineHeight: 10, textAlign: 'center'
-                }}>₹{rounditem(parseFloat(item?.call_price) + parseFloat(item?.commission_call_price))}/min</Text>
+                }}>₹{rounditem(parseFloat(item?.normal_video_call_price) + parseFloat(item?.commission_normal_video_call_price))}/min</Text>
               </TouchableOpacity>
 
 
             </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
     )
   };
 
@@ -351,6 +381,7 @@ const Search = ({ chatListData, navigation, dispatch, isRefreshing, isMoreLoadin
             placeholder='Search astrologers by name'
             value={searchTerm}
             onChangeText={setSearchTerm}
+            style={{color:colors.black_color7}}
           />
         </View>
       </View>

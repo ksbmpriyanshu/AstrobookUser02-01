@@ -38,7 +38,7 @@ const AstroLive = ({
   const [isLoading, setIsLoading] = useState(false);
   const [liveAstroListData, setLiveAstroListData] = useState(null);
   const { t } = useTranslation();
- console.log("shreee::>>>>>>>>>",liveAstroListData)
+ console.log("shreee::>>>>>>>>>:",recentLiveSteamingsData)
   useEffect(() => {
     dispatch(AstrologerActions.getRecentLiveStreamings())
   }, [dispatch])
@@ -170,6 +170,7 @@ const AstroLive = ({
 
   function recentLiveSessions() {
     const renderItem = ({ item, index }) => {
+      console.log("kjghsdughasoudhoassd",item)
       return (
         <TouchableOpacity
           activeOpacity={0.9} // Set the active opacity level here

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View ,TouchableOpacity, Linking} from 'react-native'
 import React from 'react'
 import MyHeader from '../../components/MyHeader'
 import { useNavigation } from '@react-navigation/native'
@@ -22,10 +22,12 @@ const HelpSupport = () => {
   function adminforget() {
     return (
       <View style={{ margin: Sizes.fixPadding * 2, backgroundColor: '#F9F9F9', borderRadius: 10, justifyContent: 'center', alignItems: 'center', paddingVertical: Sizes.fixPadding }}>
-        <Text style={{ ...Fonts.black18RobotoMedium, color: colors.new_color, marginBottom: Sizes.fixPadding * 0.4, marginTop: Sizes.fixPadding }}>Please Contact</Text>
+        <Text style={{ ...Fonts.black18RobotoMedium, color:colors.astrobook1, marginBottom: Sizes.fixPadding * 0.4, marginTop: Sizes.fixPadding }}>Please Contact</Text>
         <Text style={{ ...Fonts.black16RobotoMedium, marginBottom: Sizes.fixPadding * 2 }}>AstroBook Admin Team at</Text>
         <TouchableOpacity style={{ borderWidth: 1, borderStyle: 'dotted', width: '85%', borderColor: 'black', justifyContent: 'center', alignItems: 'center', paddingVertical: Sizes.fixPadding * 2, borderRadius: 5 }}
-          // onPress={handlePress}
+           onPress={()=>{
+            Linking.openURL('mailto:support@astroBook.com')
+           }}
           activeOpacity={0.6}>
           <Text style={{ ...Fonts.black16RobotoMedium, color: colors.astrobook1 }}>support@astroBook.com</Text>
         </TouchableOpacity>

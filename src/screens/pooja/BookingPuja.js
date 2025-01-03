@@ -16,10 +16,35 @@ import { connect } from 'react-redux'
 
 
 const BookingPuja = ({ route, dispatch, pujaPayment, customerData }) => {
-  const [timeLeft, setTimeLeft] = useState('');
   const { pujaData } = route.params;
-  // console.log("Puja data",pujaData?.poojaId?.pujaName)
+  const [timeRemaining, setTimeRemaining] = useState('');
 
+  useEffect(() => {
+    const targetTime = new Date(pujaData?.poojaDate).getTime(); // Convert target date to timestamp
+    
+    // Function to calculate the remaining time
+    const calculateTimeLeft = () => {
+      const currentTime = Date.now();
+      const distance = targetTime - currentTime;
+
+      if (distance < 0) {
+        setTimeRemaining("Time's up!");
+        clearInterval(intervalId);
+      } else {
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeRemaining(`${hours}hr:${minutes < 10 ? '0' + minutes : minutes}min:${seconds < 10 ? '0' + seconds : seconds}sec`);
+      }
+    };
+
+    const intervalId = setInterval(calculateTimeLeft, 1000); // Update every second
+
+    // Cleanup the interval on unmount
+    return () => clearInterval(intervalId);
+
+  }, [pujaData?.poojaDate]);
 
 
   const payment = () => {
@@ -39,31 +64,8 @@ const BookingPuja = ({ route, dispatch, pujaPayment, customerData }) => {
     dispatch(PoojaActions.getPoojapaymnetData(data))
 
   }
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const currentTime = moment()
-      const pujaDate = moment(pujaData?.createdAt)
+  
 
-      const diff = moment.duration(pujaDate.diff(currentTime))
-
-      const days = diff.days()
-      const hours = diff.hours()
-      const minutes = diff.minutes()
-      const seconds = diff.seconds()
-
-
-      const formattedTime = `-${days}d : -${hours}h : -${minutes}m : -${seconds}s left`
-      setTimeLeft(formattedTime)
-    }
-
-
-    const timerInterval = setInterval(() => {
-      calculateTimeLeft()
-    }, 1000)
-
-
-    return () => clearInterval(timerInterval)
-  }, [pujaData?.createdAt])
 
 
   const navigation = useNavigation();
@@ -113,9 +115,13 @@ const BookingPuja = ({ route, dispatch, pujaPayment, customerData }) => {
 
           <Text style={{ ...Fonts.black11InterMedium, fontSize: responsiveFontSize(1.85), width: 150 }}>{pujaData?.poojaId?.pujaName}</Text>
           <Text style={{ ...Fonts.black11InterMedium, fontSize: responsiveFontSize(1.5), color: colors.black_color6 }}>
-            Date: {pujaData?.createdAt ? moment(pujaData.createdAt).format('DD-MM-YYYY') : ''}
-          </Text>
+          Duration: {pujaData?.duration && `${Math.floor(pujaData?.duration / 3600)} hr ${Math.floor((pujaData?.duration % 3600) / 60)} min ${pujaData?.duration % 60} sec`}
 
+          </Text>
+          <Text style={{ ...Fonts.black11InterMedium, fontSize: responsiveFontSize(1.5), color: colors.black_color6 }}>
+           Time Left: {timeRemaining}
+
+          </Text>
           <Text style={{ ...Fonts.black11InterMedium, fontSize: responsiveFontSize(2.5),color:'#F1B646' }}>Price: ₹{pujaData?.price}</Text>
 
           {/* <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", width: SCREEN_WIDTH * 0.2, height: SCREEN_HEIGHT * 0.04, borderRadius: 100, gap: SCREEN_WIDTH * 0.02, backgroundColor: "#E0C987",elevation:2}}>

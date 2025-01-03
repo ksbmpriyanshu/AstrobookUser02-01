@@ -331,6 +331,8 @@ function* sendGiftToAstrologer(actions) {
 
     const liveID = yield select(state => state.live.liveID);
     const customerData = yield select(state => state.customer.customerData);
+    console.log(customerData?._id,liveID,"sdhfoisdhfoisdhfo")
+    // return false
     const response = yield postRequest({
       url: api_url + send_gift_in_live_streaming,
       data: {
@@ -339,8 +341,8 @@ function* sendGiftToAstrologer(actions) {
         customerId: customerData?._id,
       },
     });
-
-    if (response?.success) {
+    console.log("send gift data::::>>>>",response)
+     if (response?.success) {
       yield put({ type: actionTypes.SET_GIFTED_DATA, payload: [response?.gift] })
       yield put({ type: actionTypes.SET_CUSTOMER_DATA, payload: response?.updateCustomer })
     } else {

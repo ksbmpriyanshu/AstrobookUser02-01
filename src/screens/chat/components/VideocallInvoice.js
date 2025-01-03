@@ -48,15 +48,15 @@ const VideocallInvoice = ({ dispatch, videocallInvoiceVisble, videoinvoiceData }
                 </View>
 
                 <View style={styles.itemContainer}>
-                    <Text style={styles.text}>Duration</Text>
+                    <Text style={styles.text}>Duration:</Text>
                     <Text style={styles.text}>{secondsToHMS(data?.duration ?? 0)}</Text>
                 </View>
                 <View style={styles.itemContainer}>
-                    <Text style={styles.text}>VideoCall Price</Text>
+                    <Text style={styles.text}>VideoCall Price:</Text>
                     <Text style={styles.text}>{showNumber(videoprice ?? 0)}</Text>
                 </View>
                 <View style={styles.itemContainer}>
-                    <Text style={styles.text}>Total Charge</Text>
+                    <Text style={styles.text}>Total Charge:</Text>
                     <Text style={styles.text}>{showNumber(data?.totalPrice)}</Text>
                 </View>
             </View>

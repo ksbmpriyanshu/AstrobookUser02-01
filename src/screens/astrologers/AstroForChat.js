@@ -161,18 +161,33 @@ const AstroForChat = ({
             <Text style={{ ...Fonts.primaryHelvetica, color: "#828282", fontSize: 8, textAlign: "center", lineHeight: 8 }}>2212 orders</Text>
           </View>
           <View >
-            <Image
-              source={{ uri: base_url + item.profileImage }}
-              style={{
-                width: width * 0.30,
-                height: width * 0.30,
-                borderRadius: 100,
-                borderWidth: 1,
-                borderColor: "#F1B646",
-                resizeMode: 'cover',
-                marginBottom: 5,
-              }}
-            />
+            {item?.profileImage ? (
+                           <Image
+                           source={{ uri: base_url + item.profileImage }}
+                           style={{
+                             width: width * 0.30,
+                             height: width * 0.30,
+                             borderRadius: 100,
+                             borderWidth: 1,
+                             borderColor: "#F1B646",
+                             resizeMode: 'cover',
+                             marginBottom: 5,
+                           }}
+                         />
+                        ):(  
+                          <Image
+                          source={require('../../assets/astrobookimages/avatar_book.png')}
+                          style={{
+                            width: width * 0.30,
+                            height: width * 0.30,
+                            borderRadius: 100,
+                            borderWidth: 1,
+                            borderColor: "#F1B646",
+                            resizeMode: 'cover',
+                            marginBottom: 5,
+                          }}
+                        />
+                        )}
             <Image source={require('../../assets/astrobookimages/tickverifires.png')}
               style={{ height: 20, width: 20, position: "absolute", right: responsiveScreenWidth(3), bottom: responsiveScreenHeight(2) }}
             />
@@ -261,7 +276,7 @@ const AstroForChat = ({
 
 
                   fontSize: 8, lineHeight: 10, textAlign: 'center'
-                }}>₹{rounditem(parseFloat(item?.call_price) + parseFloat(item?.commission_call_price))}/min</Text>
+                }}>₹{rounditem(parseFloat(item?.chat_price) + parseFloat(item?.commission_chat_price))}/min</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={{
@@ -382,7 +397,7 @@ const AstroForChat = ({
 
 
                   fontSize: 8, lineHeight: 10, textAlign: 'center'
-                }}>₹{rounditem(parseFloat(item?.call_price) + parseFloat(item?.commission_call_price))}/min</Text>
+                }}>₹{rounditem(parseFloat(item?.normal_video_call_price) + parseFloat(item?.commission_normal_video_call_price))}/min</Text>
               </TouchableOpacity>
 
             </View>

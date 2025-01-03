@@ -60,71 +60,73 @@ const [selectedItemId, setSelectedItemId] = useState(null);
 
 
 
-
     function List() {
-        const renderItem = ({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('BookingPuja', { pujaData: item })}>
-                <View style={{ display: "flex", flexDirection: "row", paddingHorizontal: 10, paddingVertical: 10, gap: 10 }}>
-                    <View style={{ flex: 0.25, }}>
-                        <View style={{ alignSelf: "center", backgroundColor: '#F4F4F4', height: 40, borderRadius: 60, width: 40, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                            <Text style={{ color: "#000", ...Fonts.primaryHelvetica, fontSize: 15 }}>{new Date(item?.createdAt).getDate()}</Text>
-                        </View>
-                        <Text style={{ color: "#000", ...Fonts.primaryHelvetica, fontSize: 13, textAlign: "center" }}>
-                            {new Date(item?.createdAt).toLocaleString('en-US', { month: 'short' })}
-                        </Text>
-                        <Image source={require('../../assets/astrobookimages/line.png')}
-                            style={{ objectFit: "contain", height: 90, alignSelf: "center" }}
-                        />
-                    </View>
-                    <View style={{ flex: 0.75, borderWidth: 0.3, borderRadius: 10, borderColor: "#dadada" }}>
-                        <ImageBackground
-                            source={{ uri: img_url + item?.poojaId?.image }}
-                            style={styles.poojaImage}
-                            imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
-                        >
-                            <View style={styles.overlay} />
-                            <View style={{
-                                backgroundColor: "#000", position: "absolute", paddingHorizontal: 10, paddingVertical: 3,
-                                borderRadius: 10, left: 6, top: 3
-                            }}>
-                                <Text style={{ color: "#fff", fontSize: 7 }}>{item?.categoryId?.categoryName}</Text>
+        const renderItem = ({ item }) => {
+            console.log("::>>>>>",item);  // Logging the item to the console
+            
+            return (
+                <TouchableOpacity onPress={() => navigation.navigate('BookingPuja', { pujaData: item })}>
+                    <View style={{ display: "flex", flexDirection: "row", paddingHorizontal: 10, paddingVertical: 10, gap: 10 }}>
+                        <View style={{ flex: 0.25, }}>
+                            <View style={{ alignSelf: "center", backgroundColor: '#F4F4F4', height: 40, borderRadius: 60, width: 40, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                                <Text style={{ color: "#000", ...Fonts.primaryHelvetica, fontSize: 15 }}>{new Date(item?.createdAt).getDate()}</Text>
                             </View>
-                            <Image source={{ uri: base_url + item?.astrologerId?.profileImage }}
-                                style={{
-                                    height: 40,
-                                    width: 40,
-                                    borderRadius: 100,
-                                    borderWidth: 1,
-                                    borderColor: "#fff",
-                                    position: "absolute",
-                                    right: 5,
-                                    top: 3,
-                                }}
+                            <Text style={{ color: "#000", ...Fonts.primaryHelvetica, fontSize: 13, textAlign: "center" }}>
+                                {new Date(item?.createdAt).toLocaleString('en-US', { month: 'short' })}
+                            </Text>
+                            <Image source={require('../../assets/astrobookimages/line.png')}
+                                style={{ objectFit: "contain", height: 90, alignSelf: "center" }}
                             />
-
-                            <View style={{ position: "absolute", bottom: 4, left: 5, }}>
-                                <Text style={{ color: "#fff", ...Fonts.primaryHelvetica, fontSize: 12, }}
-
-                                >{item?.pujaName?.split(" ").slice(0, 4).join(" ")}{item?.pujaName?.split(" ").length > 4 ? "..." : ""}</Text>
-                                {item?.shortDescription && (
-                                    <Text style={{ color: "#fff", ...Fonts.primaryHelvetica, fontSize: 13, }}>{item?.shortDescription}</Text>
-
-                                )}
-                            </View>
-                        </ImageBackground>
-                        <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 5, paddingTop: 5, paddingBottom: 10, }}>
-                            <Text style={styles.dateText}>Price: {"₹" + item?.price}</Text>
-                            <View style={styles.cartBtn}
-
+                        </View>
+                        <View style={{ flex: 0.75, borderWidth: 0.3, borderRadius: 10, borderColor: "#dadada" }}>
+                            <ImageBackground
+                                source={{ uri: img_url + item?.poojaId?.image }}
+                                style={styles.poojaImage}
+                                imageStyle={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
                             >
-                                <Text style={[styles.dateText, { color: "#fff" }]}>Add to Cart</Text>
+                                <View style={styles.overlay} />
+                                {/* <View style={{
+                                    backgroundColor: "#000", position: "absolute", paddingHorizontal: 10, paddingVertical: 3,
+                                    borderRadius: 10, left: 6, top: 3
+                                }}>
+                                    <Text style={{ color: "#fff", fontSize: 7 }}>{item?.categoryId?.categoryName}</Text>
+                                </View> */}
+                                <Image source={{ uri: base_url + item?.astrologerId?.profileImage }}
+                                    style={{
+                                        height: 40,
+                                        width: 40,
+                                        borderRadius: 100,
+                                        borderWidth: 1,
+                                        borderColor: "#fff",
+                                        position: "absolute",
+                                        right: 5,
+                                        top: 3,
+                                    }}
+                                />
+    
+                                <View style={{ position: "absolute", bottom: 4, left: 5, }}>
+                                    <Text style={{ color: "#fff", ...Fonts.primaryHelvetica, fontSize: 12, }}>
+                                        {item?.poojaId?.pujaName?.split(" ").slice(0, 4).join(" ")}{item?.pujaName?.split(" ").length > 4 ? "..." : ""}
+                                    </Text>
+                                    {item?.shortDescription && (
+                                        <Text style={{ color: "#fff", ...Fonts.primaryHelvetica, fontSize: 13, }}>
+                                            {item?.shortDescription}
+                                        </Text>
+                                    )}
+                                </View>
+                            </ImageBackground>
+                            <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 5, paddingTop: 5, paddingBottom: 10, }}>
+                                <Text style={styles.dateText}>Price: {"₹" + item?.price}</Text>
+                                <View style={styles.cartBtn}>
+                                    <Text style={[styles.dateText, { color: "#fff" }]}>Add to Cart</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
-            </TouchableOpacity>
-
-        );
+                </TouchableOpacity>
+            );
+        };
+    
         return (
             <>
                 <FlatList
@@ -133,8 +135,9 @@ const [selectedItemId, setSelectedItemId] = useState(null);
                     showsVerticalScrollIndicator={false}
                 />
             </>
-        )
+        );
     }
+    
     function FilterSection() {
         return (
             <View 

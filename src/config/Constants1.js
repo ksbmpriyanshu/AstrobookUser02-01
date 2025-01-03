@@ -160,9 +160,10 @@ export const get_yellow = 'api/get_yellow';
 export const get_auspicions = 'api/get_auspicions';
 export const get_question = 'api/get_question';
 export const get_astro_details = 'api2/get_astro_details';
-export const getBanner = 'api/getBanner';
+export const getBanner = 'api/getBanner';       
 
-export const google_map_key = 'AIzaSyC39FKxanlCKxkJmRz85zeg0DW0YD1AknI';
+// export const google_map_key = 'AIzaSyC39FKxanlCKxkJmRz85zeg0DW0YD1AknI';
+export const google_map_key = 'AIzaSyDNDyUOHXpIPvqWPabSSN518pXpwsDemSc';
 export const call_app_id = 1999906308;
 export const call_app_sign = 'd4d7c9f488ad6e4e0e76baf0e6796b191fd650729107cc90f9bde5472240eb0c';
 

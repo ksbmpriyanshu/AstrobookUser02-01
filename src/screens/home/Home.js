@@ -82,6 +82,7 @@ const Home = ({
 }) => {
   console.log("customereviewdata", customereviewdata)
   console.log("myorderData", myorderData)
+  console.log("bannerData", bannerData)
 
   const [astoListData, setAstroListData] = useState(false);
   const [livelist, setLivelist] = useState(null);
@@ -583,7 +584,7 @@ const Home = ({
         <TouchableOpacity
           onPress={() => navigation.navigate('Search')}
           style={{ flexDirection: "row", alignItems: "center", gap: SCREEN_WIDTH * 0.02, paddingVertical: SCREEN_HEIGHT * 0.015, paddingHorizontal: SCREEN_WIDTH * 0.02, borderRadius: 5, backgroundColor: "white", elevation: 1 }}>
-          <AntDesign name='search1' size={20}  color={colors.black_color7}/>
+          <AntDesign name='search1' size={20} color={colors.black_color7} />
           <Text style={{ ...Fonts.black11InterMedium, color: colors.black_color7 }}>Search astrologers</Text>
         </TouchableOpacity>
 
@@ -758,25 +759,28 @@ const Home = ({
         <View style={{}}>
           <View style={styles.orderAstrologerView}>
 
+
             <View>
+
+            <View
+  style={{
+    height: SCREEN_HEIGHT * 0.02,
+    width: SCREEN_WIDTH * 0.04,
+    borderRadius: 100,
+    zIndex: 1,
+    backgroundColor: (item?.astrologerId?.chat_status === "'online'" || item?.astrologerId?.call_status  === "'online'" || item?.astrologerId?.video_call_status  === "'online'") ? 'green' : '',
+  }}
+></View>
 
               <Image source={{ uri: base_url + item?.astrologerId?.profileImage }} style={styles.orderAstrologerImage} />
             </View>
             <View style={{ gap: 2 }}>
               <Text style={styles.orderAstrologerText}>{item?.astrologerId?.astrologerName}</Text>
               <Text style={styles.orderAstrologerDate}>
-              {moment(item?.createdAt).format('DD-MM-YYYY')}
+                {moment(item?.createdAt).format('DD-MM-YYYY')}
               </Text>
               <View style={styles.btnView}>
-                {/* <TouchableOpacity
-                  onPress={() => navigation.navigate('astrologerDetailes', {
-                    _id: item?.astrologerId,
-                    type: 'chat',
-                  })
-                  }
-                  style={styles.orderBtnOne}>
-                  <Text style={styles.orderTextOne}>View chat</Text>
-                </TouchableOpacity> */}
+
                 <TouchableOpacity
                   onPress={() => navigation.navigate('astrologerDetailes', {
                     _id: item?.astrologerId,
@@ -796,13 +800,13 @@ const Home = ({
 
 
 
-    function NoDATA(){
-      return(
+    function NoDATA() {
+      return (
         <View style={{}}>
-        <View style={{paddingHorizontal:SCREEN_WIDTH*0.35,paddingVertical:SCREEN_HEIGHT*0.01}}>
-          <Text style={{...Fonts.black11InterMedium}}>No Data Found</Text>
-          
-        </View>
+          <View style={{ paddingHorizontal: SCREEN_WIDTH * 0.35, paddingVertical: SCREEN_HEIGHT * 0.01 }}>
+            <Text style={{ ...Fonts.black11InterMedium }}>No Data Found</Text>
+
+          </View>
         </View>
       )
     }
@@ -859,7 +863,7 @@ const Home = ({
                   ? `${item.astrologerName.slice(0, 10)}...`
                   : item?.astrologerName}
               </Text>
-              <Text style={styles.astrologerMin}>₹ {Number(item?.call_price)+Number(item.commission_call_price)}/min</Text>
+              <Text style={styles.astrologerMin}>₹ {Number(item?.call_price) + Number(item.commission_call_price)}/min</Text>
               <View style={styles.callView}>
 
                 <TouchableOpacity activeOpacity={0.8} key={index} onPress={() => navigation.navigate('astrologerDetailes', {
@@ -1081,9 +1085,9 @@ const Home = ({
             <Text style={styles.kundaliIconText}>Kundli {'\n'}Matching</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity 
-        onPress={()=>navigation.navigate("poojacategory")}
-        style={styles.kundaliIconView}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("poojacategory")}
+          style={styles.kundaliIconView}>
           <Image source={require('../../assets/astrobookimages/remedy.png')} style={styles.kundaliImage} />
           <Text style={styles.kundaliIconText}>Remedies</Text>
         </TouchableOpacity>
@@ -1094,7 +1098,7 @@ const Home = ({
   function bannerInfo() {
     return (
       <Image
-        source={require('../../assets/astrobookimages/banner.png')}
+        source={require('../../assets/images/bannerhome.jpg')}
         style={{ width: width * 0.95, height: SCREEN_HEIGHT * 0.17, borderRadius: 10, alignSelf: "center" }}
         resizeMode="cover"
       />
@@ -1445,7 +1449,7 @@ const Home = ({
       </View>
 
     );
-   
+
 
     return (
       <View style={{ backgroundColor: "#fff", marginVertical: 5, paddingVertical: 10, paddingHorizontal: 10, marginTop: 10, }}>

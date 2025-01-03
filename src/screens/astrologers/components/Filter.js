@@ -6,6 +6,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import { Fonts } from '../../../assets/style';
 import { CheckBox } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
 const Filter = ({ dispatch, filterData, skillData, languageData }) => {
     const navigation=useNavigation();
     console.log("languageData", languageData)
@@ -164,8 +165,8 @@ const Filter = ({ dispatch, filterData, skillData, languageData }) => {
                                 <Text style={styles.filterTextSkills}>Language</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ flex: 0.6, paddingHorizontal: 10, paddingBottom: 10, paddingTop: 20, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                            <View>
+                        <View style={{ flex: 0.6, paddingHorizontal: 10, paddingBottom:20, paddingTop: 20, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                            <ScrollView>
                                 {showGender && (
                                     <>
                                         <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
@@ -249,7 +250,7 @@ const Filter = ({ dispatch, filterData, skillData, languageData }) => {
                                         </View>
                                     </>
                                 )}
-                            </View>
+                            </ScrollView>
                             <View>
                                 <TouchableOpacity style={{
                                     backgroundColor: "#F1B646",

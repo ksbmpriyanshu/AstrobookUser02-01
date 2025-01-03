@@ -117,14 +117,14 @@ const Login = props => {
           enableAutomaticScroll={true}> */}
 
           <View style={styles.logoView}>
-            <Text style={{
+            {/* <Text style={{
               ...Fonts.primaryRegular,
               color: "#fff",
               textDecorationLine: "underline",
               position: "absolute",
               top: 10,
               right: 10,
-            }}>Skip</Text>
+            }}>Skip</Text> */}
             <View>
               <Image source={require('../../assets/astrobookimages/logo.png')} style={styles.loginLogo} />
               <Text style={styles.loginImageText}>Your Astrology Search Ends Here</Text>
@@ -268,7 +268,9 @@ const Login = props => {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
+            <View style={{alignItems:"center"}}>
             <Text style={styles.modalTitle}>Terms & Conditions</Text>
+            </View>
             <ScrollView>
               <Text style={styles.modalText}>
 
@@ -293,7 +295,9 @@ const Login = props => {
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
+          <View style={{alignItems:"center"}}>
             <Text style={styles.modalTitle}>Privacy Policy</Text>
+            </View>
             <ScrollView>
               <Text style={styles.modalText}>
 
@@ -339,6 +343,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth:1
   },
   loginLogo: {
     width: SCREEN_WIDTH * 0.8,
@@ -420,10 +425,11 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(2.2),
     fontWeight: 'bold',
     marginBottom: 10,
+    color:colors.black_color7
   },
   modalText: {
     fontSize: responsiveScreenFontSize(1.8),
-    color: '#333',
+    color: colors.black_color7,
     marginBottom: 20,
   },
   modalCloseButton: {
